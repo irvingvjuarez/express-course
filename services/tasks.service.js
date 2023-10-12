@@ -1,9 +1,9 @@
-const pool = require('../libs/postgres.pool');
+const sequelize = require('../libs/sequelize');
 
 class TasksService {
     async getAll(query = 'SELECT * FROM tasks') {
-        const response = await pool.query(query);
-        return response.rows;
+        const [data, metadata] = await sequelize.query(query);
+        return {data, metadata};
     }
 }
 
